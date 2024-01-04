@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  frontend:
+    build: spam_frontend
+    image: spam_frontend:v1.0
+    ports:
+      - 8501:8501
+    networks: 
+      SpamClassifier: 
+        aliases: 
+          - frontend.docker
+    depends_on:
+      - backend
+    volumes:
+        - ./spam_frontend:/app
+        - ./storage:/storage
+
+  backend:
+    build: spam_backend
+    image: spam_backend:v1.0
+    ports:
+      - 8000:8000
+    networks: 
+      SpamClassifier: 
+        aliases: 
+          - backend.docker
+    volumes:
+      - ./spam_backend/app:/app
+      - ./storage:/storage
+
+networks:
+  SpamClassifier:
+    driver: bridge
