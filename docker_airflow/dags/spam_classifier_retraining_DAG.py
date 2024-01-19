@@ -2,9 +2,9 @@ import airflow
 from airflow import DAG
 from airflow.operators.python_operator import ShortCircuitOperator
 from airflow.providers.docker.operators.docker import DockerOperator
+from docker.types import Mount
 from datetime import datetime, timedelta
 
-# Define the default DAG arguments
 default_args = {
     'owner': 'cornellius',
     'depends_on_past': False,
@@ -35,14 +35,15 @@ dag = DAG(
 drift_check_task = DockerOperator(
     task_id='condition_check_drift',
     image='drift_detection_env:1.0',
-    api_version='auto',
-    auto_remove=True,
-    command="python /opt/airflow/scripts/project_spam_classifier/model_retrain.py",
+    command="python /opt/airflow/scripts/project_spam_classifier/drift_detection.py",
     docker_url="unix://var/run/docker.sock",
     network_mode="bridge",
     do_xcom_push=True,
     dag=dag,
-    mounts=["./docker_airflow/scripts:/opt/airflow/scripts"]
+    mount_tmp_dir=False,
+    mounts=[Mount(source='deploy_model/docker_airflow/scripts', #change to absolute path, 
+                  target='/opt/airflow/scripts', 
+                  type='bind')]
     
 )
 
@@ -64,7 +65,17 @@ model_retrain_task = DockerOperator(
     docker_url="unix://var/run/docker.sock",
     network_mode="bridge",
     dag=dag,
-    mounts=["./docker_airflow/scripts:/opt/airflow/scripts"]
+    mount_tmp_dir=False,
+        mounts=[
+        Mount(source='deploy_model/storage', #change to absolute path, 
+              target='/opt/airflow/storage', 
+              type='bind'),
+        Mount(source='docker_airflow/scripts', #change to absolute path, 
+                  target='/opt/airflow/scripts', 
+                  type='bind')  
+
+
+    ]
 )
 
 # Set the task dependencies

@@ -1,5 +1,4 @@
 .vscode/
 spam_classifier/
-docker_airflow/logs/dag_processor_manager
-docker_airflow/logs/scheduler
+docker_airflow/logs
 docker_airflow/scripts/project_spam_classifier/project_spam_classifier
