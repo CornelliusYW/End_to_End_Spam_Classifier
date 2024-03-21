@@ -4,7 +4,7 @@ from fastapi import FastAPI
 import numpy as np
 import pickle
 
-filename = 'app/spam_classifier_pipeline.pkl'
+filename = 'storage\spam_classifier_pipeline.pkl'
 
 with open(filename, 'rb') as file:
     model = pickle.load(file)

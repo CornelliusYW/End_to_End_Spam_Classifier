@@ -16,8 +16,3 @@ if st.button('Spam Classifier Prediction'):
     response = requests.request("POST", url, headers=header, data=payload)
     response = response.text    
     st.write(f"The Email is {str(response)}")
-
-
-
-
-
