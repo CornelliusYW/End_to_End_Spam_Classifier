@@ -1,4 +1,4 @@
-This is a code repository collection for the NLP Machine Learning Spam Classifier end-to-end project. The article for this code will be attached here as soon as it has been published. The code is still incomplete as it's still in the process of cleaning up, so keep an eye on this repository.
+This is a code repository collection for the NLP Machine Learning Spam Classifier end-to-end project. The article for this code can be seen here: https://medium.com/towards-artificial-intelligence/end-to-end-machine-learning-project-development-spam-classifier-9fe6ca4efed2?sk=75a2dcda225e9ac3f3dc4ea2a48d6518
 
 ### Aim
 This project aims to develop a spam classifier model from the available email data and simulate how to deploy and maintain them.
@@ -12,6 +12,11 @@ We would follow the standard data science project for this project, including:
 4. Model Evaluation
 5. Model Deployment
 6. Model Maintenance
+
+Overall, the project is structured like the following image:
+
+![end-to-end-spam-classification-flowchart](https://github.com/cornelliusyudhawijaya/End_to_End_Spam_Classifier/assets/32679460/964ab2ff-49fe-4e73-b34d-650b6862a560)
+
 
 ### Tech Stack
 For this project, we would use various open-source tech stacks that are appropriate for each step, including:
